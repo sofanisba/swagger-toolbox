@@ -15,21 +15,37 @@ var jsonEditor2 = CodeMirror.fromTextArea(document.getElementById("myTextarea3")
     readOnly: true
 });
 
-var getJSON = new XMLHttpRequest()
+
+var method = document.getElementById('method')
+var xhr = new XMLHttpRequest()
+var expectParams = false
+
+method.onchange = () => {
+  var needsParams = ['PUT', 'PATCH', 'POST', 'DELETE']
+  if (needsParams.includes(method.value)) {
+    expectParams = true
+    document.getElementById('params-wrapper').classList.remove('hidden')
+  }
+}
 
 document.getElementById('request-json').onclick = () => {
   var baseRoute = document.getElementById('base').value
   var path = document.getElementById('path').value
   var token = document.getElementById('token').value
-  var method = document.getElementById('method').value
   var request = baseRoute + path + '?token=' + token
+  var params = document.getElementById('params').value
   document.getElementById('url').innerHTML = request
   document.getElementById('built-url').classList.remove('hidden')
 
-  getJSON.open(method, request)
-  getJSON.send()
-  getJSON.onreadystatechange = () => {
-    jsonEditor.setValue(getJSON.response)
+  xhr.open(method.value, request, true)
+
+  if (expectParams) {
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+  }
+
+  xhr.send(params)
+  xhr.onreadystatechange = () => {
+    jsonEditor.setValue(xhr.response)
   }
 }
 
