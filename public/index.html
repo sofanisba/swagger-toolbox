@@ -124,22 +124,32 @@
                     </div>
                     <div class="modal-body">
                       <div class="content">
-                        <div class="form-group">
-                          <label class="form-label" for="base">Base URL</label>
-                          <input class="form-input" type="text" id="base" placeholder="http://localhost:8080">
+                        <div class="input-group">
+                          <span class="input-group-addon ">Base URL</span>
+                          <input class="form-input" type="text" id="base" placeholder="http://localhost:8080" value="http://localhost:8080">
                         </div>
-                        <div class="form-group">
-                          <label class="form-label" for="path">Path</label>
-                          <input class="form-input" type="text" id="path" placeholder="/v1/portal/clients">
+                        <br>
+                        <div class="input-group">
+                          <span class="input-group-addon ">Path</span>
+                          <input class="form-input" type="text" id="path" placeholder="/v1/clients">
+                          <select class="form-select" id="method">
+                            <option>GET</option>
+                            <option>POST</option>
+                            <option>PUT</option>
+                            <option>PATCH</option>
+                            <option>DELETE</option>
+                          </select>
                         </div>
-                        <div class="form-group">
-                          <label class="form-label" for="token">Token</label>
+                        <br>
+                        <div class="input-group">
+                          <span class="input-group-addon ">Token</span>
                           <input class="form-input" type="text" id="token" placeholder="789123879812hdfsdsf">
                         </div>
+                        <br>
                         <button class="btn" id="request-json">Request</button>
-                        <div class="hidden" style="visibility:hidden">
-                          <p id="url">Built URL:</p>
-                          <p class="label"></p>
+                        <div class="hidden" id="built-url">
+                          <p>Built URL:</p>
+                          <p id="url"></p>
                         </div>
                       </div>
                     </div>

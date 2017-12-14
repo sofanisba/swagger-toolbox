@@ -91,3 +91,7 @@
  .accordion .accordion-item .accordion-header {
      background: #f0f0f1;
  }
+
+ .hidden {
+   visibility: hidden;
+ }

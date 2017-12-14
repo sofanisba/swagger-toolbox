@@ -15,6 +15,24 @@ var jsonEditor2 = CodeMirror.fromTextArea(document.getElementById("myTextarea3")
     readOnly: true
 });
 
+var getJSON = new XMLHttpRequest()
+
+document.getElementById('request-json').onclick = () => {
+  var baseRoute = document.getElementById('base').value
+  var path = document.getElementById('path').value
+  var token = document.getElementById('token').value
+  var method = document.getElementById('method').value
+  var request = baseRoute + path + '?token=' + token
+  document.getElementById('url').innerHTML = request
+  document.getElementById('built-url').classList.remove('hidden')
+
+  getJSON.open(method, request)
+  getJSON.send()
+  getJSON.onreadystatechange = () => {
+    jsonEditor.setValue(getJSON.response)
+  }
+}
+
 
 function processJSON() {
     var jsonString = jsonEditor.getValue().trim();
